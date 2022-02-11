@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NewsapiService } from '../services/newsapi.service';
 
 @Component({
   selector: 'app-topheadline',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopheadlineComponent implements OnInit {
 
-  constructor() { }
+  constructor(private api: NewsapiService) { }
+
+// display headline data 
+
+topHeadlinesData:any = [];
 
   ngOnInit(): void {
+    this.api.headlinesNews().subscribe((result)=>{
+      console.log(result.articles)
+      this.topHeadlinesData = result.articles
+    })
   }
 
 }
